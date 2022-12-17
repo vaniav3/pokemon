@@ -1,0 +1,85 @@
+
+#root {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.card {
+    background-color: rgb(226, 225, 225);
+    border-radius: 20px;
+    text-align: center;
+    margin: 20px;
+    width: 230px;
+    height: 300px;
+}
+
+.card:hover{
+    box-shadow: 0 0 11px rgba(107, 107, 107, 0.2);
+    transform: translate(0px, -10px);
+	cursor: pointer;
+}
+
+.title {
+    font-size: 60px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+
+}
+
+.card-text {
+    letter-spacing: 3.2px;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+h3{
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background-color: rgb(202, 33, 33);
+}
+
+h2{
+    transform: translate(0px, -30px);
+    transition: 0.5s;
+}
+
+p{
+    visibility: hidden;
+    transform: translate(0px, -36px);
+    transition: 0.5s;
+}
+
+.img{
+    width: 200px;
+    margin: 20px;
+}
+
+.card:hover .card-text h2{
+    transform: translate(0px, -150px);
+    transition: ease-in-out 0.5s;
+    visibility: visible;
+}
+
+.card:hover .card-text p{
+    transform: translate(0px, -150px);
+    transition: ease-in-out 0.5s;
+    visibility: visible;
+}
+
+.card:hover .img{
+    opacity: 50%;
+}
