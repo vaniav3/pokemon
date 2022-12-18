@@ -1,6 +1,14 @@
-
-#root {
+body{
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+    padding: 0;
     font-family: 'Roboto', sans-serif;
+}
+
+#root{
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
 }
 
 .container{
@@ -32,7 +40,6 @@
     font-weight: bold;
     color: rgb(0, 0, 0);
     text-align: center;
-
 }
 
 .card-text {
@@ -72,14 +79,34 @@ p{
     transform: translate(0px, -150px);
     transition: ease-in-out 0.5s;
     visibility: visible;
+    text-shadow: rgb(124, 124, 124) 0.1em 0.1em 0.2em;
 }
 
 .card:hover .card-text p{
     transform: translate(0px, -150px);
     transition: ease-in-out 0.5s;
     visibility: visible;
+    text-shadow: rgb(124, 124, 124) 0.1em 0.1em 0.2em;
 }
 
 .card:hover .img{
     opacity: 50%;
+}
+
+button {
+    padding: 8px;
+    font-weight: 300;
+    font-size: 25px;
+    color:  rgb(255, 255, 255);
+    background-color:  rgb(202, 33, 33);
+    border-radius: 15px;
+    margin-left: 50%;
+    font-weight: bold;
+}
+
+button:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(202, 33, 33);
+    border: 3px double  rgb(202, 33, 33);
+    cursor: pointer;
 }
