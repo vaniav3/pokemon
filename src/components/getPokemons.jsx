@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import '../style.css';
+import '../css/styles.css'
 import CardPokemon from './cardPokemon';
 
 export default function GetPokemonEvolution () {
@@ -8,27 +8,44 @@ export default function GetPokemonEvolution () {
 
     async function fetchData (){  
         try {
-            const response = await fetch(`https://pokeapi.co/api/v2/evolution-chain?limit=468`)
+            const response = await fetch(`https://pokeapi.co/api/v2/evolution-chain?limit=470`)
             const data = await response.json()
             const urlEvolution = data.results.map(data => data.url)
-            const list = await Promise.all(
+            let list = []
+            const listPokemonName = await Promise.all(
                 urlEvolution.map(async url => {
                     const response = await fetch(url)
                     const data = await response.json()
-                    if(data.chain.evolves_to.length == 0){
-                        const response_list = await fetch(`https://pokeapi.co/api/v2/pokemon/${data.chain.species.name}`)
-                        const data_list = await response_list.json()
-                        const newPokemon = {
-                            id: data_list.id,
-                            name : data_list.name,
-                            image: data_list.sprites.other.home.front_default,
-                            weight: data_list.weight
-                        }
-                        setPokemon( prev => [...prev, newPokemon])   
-                    }
+                    data.chain.evolves_to.length > 0 ? 
+                        data.chain.evolves_to.map(data => {
+                            data.evolves_to.length > 0 ? 
+                                data.evolves_to.map(data => {
+                                    list.push(data.species.name)
+                                })
+                            :
+                            list.push(data.species.name)
+                        })
+                        
+                    :
+                    list.push(data.chain.species.name)
                     
                 })
             )
+
+            const listPokemon = await Promise.all(
+                list.map(async name => {
+                    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+                    const data = await response.json()
+                    const newPokemon = {
+                        id: data.id,
+                        name : data.name,
+                        image: data.sprites.other.home.front_default,
+                        weight: data.weight,
+                        type: data.types.map(data => data.type.name)
+                    }
+                    setPokemon( prev => [...prev, newPokemon])
+                })  
+            );
         } 
         catch (e) {
             console.error(e)
@@ -38,12 +55,18 @@ export default function GetPokemonEvolution () {
     useEffect(() => {
         fetchData();
     }, []);
-
     return (
         <>
-            <h1 className='title'>Pokédex </h1>  
-            <h3> Pokemons sin evolución</h3>
-            <CardPokemon pokemons = {pokemon} />
+            <div className="header">
+                <h1 className='title'>Pokédex </h1>  
+                <h3> Pokemons sin evolución</h3>
+            </div>
+            {
+                pokemon.length > 0 ?
+                        <CardPokemon pokemons={pokemon} />
+                :
+                <h1>Loading...</h1>
+            }
         </>
         
     )
