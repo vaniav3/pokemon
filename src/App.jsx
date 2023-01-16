@@ -1,10 +1,12 @@
+import { Route, Routes } from 'react-router-dom';
 import GetPokemonEvolution from './components/getPokemons'
-import './style.css'
 
 function App() {
   return (
     <>
-      <GetPokemonEvolution/>
+    <Routes>
+      <Route path='/' element={<GetPokemonEvolution/>}/>
+    </Routes>
     </> 
   )
 }
